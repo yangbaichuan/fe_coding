@@ -123,3 +123,18 @@ export function includes(data, value) {
   }
   return result;
 }
+
+export function flat(data, deep) {
+  if (!deep) deep = 1;
+  var result = [];
+  (function deepEach(arr, deepNum) {
+    for (var i = 0; i < arr.length; i++) {
+      if (isArray(arr[i]) && deepNum <= deep) {
+        deepEach(arr[i], deepNum + 1)
+      } else {
+        result.push(arr[i])
+      }
+    }
+  })(data, 1)
+  return result
+}

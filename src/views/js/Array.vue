@@ -57,6 +57,11 @@
 			<a-list-item-meta title="includes" description="基于for循环实现，默认为false，出现符合元素的值置为true，跳出循环" />
 			<div>运行结果：{{ someResult }}</div>
 		</a-list-item>
+		<a-list-item>
+			<a-list-item-meta title="flat" description="基于递归实现，根据层级判断是否进入下一次循环" />
+			<div>运行结果(1层)：{{ flatResult }}</div>
+			<div>运行结果(2层)：{{ flatResult2 }}</div>
+		</a-list-item>
 	</a-list>
 </template>
 
@@ -66,7 +71,8 @@
 		name: 'ArrayJs',
 		data() {
 			return {
-				data: [ 1, 2, 3, 4, 5 ]
+				data: [ 1, 2, 3, 4, 5 ],
+				data2: [ 1 ,2, [3, 4, [5, 6] ] ]
 			}
 		},
 		computed: {
@@ -138,6 +144,12 @@
 				return arrayUtil.includes(this.data, function (val) {
 					return val > 2;
 				})
+			},
+			flatResult () {
+				return arrayUtil.flat(this.data2)
+			},
+			flatResult2 () {
+				return arrayUtil.flat(this.data2, 2)
 			}
 		}
 	}
